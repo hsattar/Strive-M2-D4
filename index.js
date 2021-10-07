@@ -16,7 +16,6 @@ const addPlayerToArray = () => {
         alert('You Can\'t Add An Empty Name')
         return
     }
-    console.log(playerNames)
     playerNames.push(playersNameInput.value)
     playersNameInput.value = ''
     displayPlayersInWaitingArea()
@@ -69,11 +68,16 @@ const assignPlayerToTeam = () => {
     }
     let randomPlayer = Math.floor(Math.random() * playerNames.length)
     let newMember = document.createElement('li')
+    newMember.classList.add('list-group-item')
     newMember.innerText = playerNames[randomPlayer]
-    playerNames.splice(randomPlayer, 1)
+    let deleteBtn = document.createElement('i')
+    deleteBtn.className = 'btn btn-danger bi bi-trash mx-2'
+    newMember.appendChild(deleteBtn)
+    playerNames.splice(randomPlayer, 1) 
     let chosenTeam = document.getElementById(`team${assignPlayerClicks}`)
     chosenTeam.appendChild(newMember)
     displayPlayersInWaitingArea()
+    removePlayer(deleteBtn, newMember)
 }
 
 const assignAllPlayersToTeams = () => {
@@ -94,6 +98,16 @@ const assignAllPlayersToTeams = () => {
     displayPlayersInWaitingArea()
 }
 
+
+// REMOVE PLAYER FROM A TEAM
+
+const removePlayer = (e, playerName) => {
+    e.addEventListener('click', () => {
+        playerNames.push(playerName.innerText)
+        playerName.remove()
+        displayPlayersInWaitingArea()
+    }) 
+}
 
 
 // BUTTON CLICK EVENT LISTENERS
