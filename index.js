@@ -7,6 +7,7 @@ let createTeamClicks = 0
 
 let playersNameInput = document.getElementById('players-name-input')
 let noOfTeamsInput = document.getElementById('no-of-teams-input')
+let displayTeamsArea = document.getElementById('display-teams-area')
 
 
 // ADDING & DISPLAYING THE PLAYERS IN WAITING AREA
@@ -36,7 +37,6 @@ const displayPlayersInWaitingArea = () => {
 
 const createTeamCheck = () => {
     if (createTeamClicks > 0) {
-        let displayTeamsArea = document.getElementById('display-teams-area')
         displayTeamsArea.innerHTML = ''
     }
 }
@@ -46,7 +46,6 @@ const createTeams =() => {
     createTeamClicks++
     noOfTeams = noOfTeamsInput.value
     noOfTeamsInput.value = ''
-    let displayTeamsArea = document.getElementById('display-teams-area')
     for (let i = 1; i <= noOfTeams; i++) {
         let displayTeamDiv = document.createElement('div')
         displayTeamDiv.className = 'col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-2'
@@ -110,12 +109,26 @@ const removePlayer = (e, playerName) => {
 }
 
 
+// RESET EVERYTHING 
+
+const resetEverything = () => {
+    playerNames = [ ]
+    noOfTeams = 0
+    assignPlayerClicks = 0
+    teamNo = 0
+    createTeamClicks = 0
+    displayTeamsArea.innerHTML = ''
+    displayPlayersInWaitingArea()
+}
+
+
 // BUTTON CLICK EVENT LISTENERS
 
 let addPlayerName = document.getElementById('add-player-name')
 let createNoOfTeams = document.getElementById('create-no-of-teams')
 let assignPLayer = document.getElementById('assign-player')
 let assignAll = document.getElementById('assign-all')
+let resetBtn = document.getElementById('reset')
 
 const triggerClickWithEnter = (input, btn) => {
     input.onkeyup = e => {
@@ -133,3 +146,4 @@ addPlayerName.addEventListener('click', addPlayerToArray)
 createNoOfTeams.addEventListener('click', createTeams)
 assignPLayer.addEventListener('click', assignPlayerToTeam)
 assignAll.addEventListener('click', assignAllPlayersToTeams)
+resetBtn.addEventListener('click', resetEverything)
