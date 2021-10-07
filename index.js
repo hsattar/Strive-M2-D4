@@ -19,11 +19,11 @@ triggerClickWithEnter(playersNameInput, addPlayerName)
 
 const displayPlayerInWaitingArea = () => {
     let waitingListArea = document.getElementById('waiting-list')
-    waitingListArea.innerHTML = '<h2>Waiting List</h2>'
+    waitingListArea.innerHTML = ''
     for (player of playerNames) {
-        let para = document.createElement('p')
-        para.innerHTML += player
-        waitingListArea.appendChild(para)
+        let item = document.createElement('li')
+        item.innerHTML += player
+        waitingListArea.appendChild(item)
     }
 }
 
