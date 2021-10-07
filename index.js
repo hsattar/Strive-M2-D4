@@ -18,7 +18,7 @@ let displayTeamsArea = document.getElementById('display-teams-area')
 
 const addPlayerToArray = () => {
     if (playersNameInput.value === '') {
-        alert('You Can\'t Add An Empty Name')
+        alert("You Can't Add An Empty Name")
         return
     }
     playerNames.push(playersNameInput.value)
@@ -66,6 +66,7 @@ const createTeams =() => {
 // ASSIGN PLAYERS TO TEAMS
 
 const assignPlayerToTeam = () => {
+    if (playerNames.length > 0) {
     assignPlayerClicks++
     if (assignPlayerClicks > noOfTeams) {
         assignPlayerClicks = 1
@@ -82,6 +83,9 @@ const assignPlayerToTeam = () => {
     chosenTeam.appendChild(newMember)
     displayPlayersInWaitingArea()
     removePlayer(deleteBtn, newMember)
+} else {
+    alert('You Have Not Added Any Names')
+}
 }
 
 const assignAllPlayersToTeams = () => {
@@ -90,8 +94,6 @@ const assignAllPlayersToTeams = () => {
         if (teamNo > noOfTeams) {
             teamNo = 0
         }
-        console.log(teamNo)
-        console.log(playerNames)
         let randomPlayer = Math.floor(Math.random() * playerNames.length)
         let newMember = document.createElement('li')
         newMember.innerText = playerNames[randomPlayer]
