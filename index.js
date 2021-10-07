@@ -11,7 +11,7 @@ let noOfTeamsInput = document.getElementById('no-of-teams-input')
 const displayPlayersInWaitingArea = () => {
     let waitingListArea = document.getElementById('waiting-list')
     waitingListArea.innerHTML = ''
-    for (player of playerNames) {
+    for (let player of playerNames) {
         let item = document.createElement('li')
         item.innerHTML += player
         waitingListArea.appendChild(item)
@@ -47,7 +47,6 @@ const createTeams =() => {
 // ASSIGN PLAYERS TO TEAMS
 
 const assignPlayerToTeam = () => {
-    console.log(playerNames)
     assignPlayerClicks++
     if (assignPlayerClicks > noOfTeams) {
         assignPlayerClicks = 1
@@ -58,7 +57,26 @@ const assignPlayerToTeam = () => {
     playerNames.splice(randomPlayer, 1)
     let chosenTeam = document.getElementById(`team${assignPlayerClicks}`)
     chosenTeam.appendChild(newMember)
-    console.log(playerNames)
+    displayPlayersInWaitingArea()
+}
+
+let teamNo = 0
+
+const assignAllPlayersToTeams = () => {
+    for (let i = 0; i < playerNames.length; i++) {
+        teamNo++
+        if (teamNo > noOfTeams) {
+            teamNo = 0
+        }
+        console.log(teamNo)
+        console.log(playerNames)
+        let randomPlayer = Math.floor(Math.random() * playerNames.length)
+        let newMember = document.createElement('li')
+        newMember.innerText = playerNames[randomPlayer]
+        playerNames.splice(randomPlayer, 1)
+        let chosenTeam = document.getElementById(`team${teamNo}`)
+        chosenTeam.appendChild(newMember)
+    }
     displayPlayersInWaitingArea()
 }
 
@@ -86,3 +104,4 @@ triggerClickWithEnter(noOfTeamsInput, createNoOfTeams)
 addPlayerName.addEventListener('click', addPlayerToArray)
 createNoOfTeams.addEventListener('click', createTeams)
 assignPLayer.addEventListener('click', assignPlayerToTeam)
+assignAll.addEventListener('click', assignAllPlayersToTeams)
