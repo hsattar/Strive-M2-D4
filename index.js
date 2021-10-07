@@ -1,3 +1,7 @@
+// ADD MODAL FOR ANY ERRORS & RESET BUTTON
+// FIX ASSIGN ALL BUTTON
+// FIX DELETE BTN ISSUE 
+
 let playerNames = [ ]
 let noOfTeams = 0
 let assignPlayerClicks = 0
@@ -26,9 +30,10 @@ const displayPlayersInWaitingArea = () => {
     let waitingListArea = document.getElementById('waiting-list')
     waitingListArea.innerHTML = ''
     for (let player of playerNames) {
-        let item = document.createElement('li')
-        item.innerHTML += player
-        waitingListArea.appendChild(item)
+        let waitingListDiv = document.createElement('div')
+        waitingListDiv.className = 'col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-2'
+        waitingListDiv.innerHTML = `<p class="border border-secondary rounded p-1">${player}</p>`
+        waitingListArea.appendChild(waitingListDiv)
     }
 }
 
