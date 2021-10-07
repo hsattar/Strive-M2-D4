@@ -1,12 +1,26 @@
 let playerNames = [ ]
 let noOfTeams = 0
 let assignPlayerClicks = 0
+let teamNo = 0
+let createTeamClicks = 0
+
 
 let playersNameInput = document.getElementById('players-name-input')
 let noOfTeamsInput = document.getElementById('no-of-teams-input')
 
 
 // ADDING & DISPLAYING THE PLAYERS IN WAITING AREA
+
+const addPlayerToArray = () => {
+    if (playersNameInput.value === '') {
+        alert('You Can\'t Add An Empty Name')
+        return
+    }
+    console.log(playerNames)
+    playerNames.push(playersNameInput.value)
+    playersNameInput.value = ''
+    displayPlayersInWaitingArea()
+}
 
 const displayPlayersInWaitingArea = () => {
     let waitingListArea = document.getElementById('waiting-list')
@@ -19,16 +33,18 @@ const displayPlayersInWaitingArea = () => {
 }
 
 
-const addPlayerToArray = () => {
-    playerNames.push(playersNameInput.value)
-    playersNameInput.value = ''
-    displayPlayersInWaitingArea()
-}
-
-
 // CREATING THE TEAMS
 
+const createTeamCheck = () => {
+    if (createTeamClicks > 0) {
+        let displayTeamsArea = document.getElementById('display-teams-area')
+        displayTeamsArea.innerHTML = ''
+    }
+}
+
 const createTeams =() => {
+    createTeamCheck()
+    createTeamClicks++
     noOfTeams = noOfTeamsInput.value
     noOfTeamsInput.value = ''
     let displayTeamsArea = document.getElementById('display-teams-area')
@@ -59,8 +75,6 @@ const assignPlayerToTeam = () => {
     chosenTeam.appendChild(newMember)
     displayPlayersInWaitingArea()
 }
-
-let teamNo = 0
 
 const assignAllPlayersToTeams = () => {
     for (let i = 0; i < playerNames.length; i++) {
